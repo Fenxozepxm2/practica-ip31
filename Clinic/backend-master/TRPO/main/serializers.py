@@ -165,11 +165,18 @@ class UserProfileSerializer(serializers.ModelSerializer):
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     username_field = 'phone'
 
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        self.user = self.user  # сохраняем в экземпляр
+        return data
+
+
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
         token['role'] = user.role
         return token
+    
 
 
 # Для заявки психолога
@@ -194,6 +201,14 @@ class ClientRegisterSerializer(serializers.ModelSerializer):
     def validate_name(self, value):
         if any(char.isdigit() for char in value):
             raise serializers.ValidationError("Имя не может содержать цифры.")
+        return value
+
+    def validate_usernamename(self, value):
+        if any(char.isdigit() for char in value):
+            raise serializers.ValidationError("Имя не может содержать цифры.")
+        # Защита от тегов
+        if '<' in value or '>' in value:
+            raise serializers.ValidationError("Недопустимые символы.")
         return value
 
     def validate_surname(self, value):
