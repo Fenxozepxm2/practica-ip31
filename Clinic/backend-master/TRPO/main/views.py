@@ -5,6 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView
+from django.shortcuts import get_object_or_404
 
 # Импортируем модели
 from .models import (
@@ -210,8 +211,8 @@ class SessionCreateView(APIView):
                 )
             
             # Ищем психолога в базе
-            psychologist = Psychologist.objects.get(id=psychologist_id)
-
+            psychologist = get_object_or_404(Psychologist, id=psychologist_id)
+            
             # 3. Берем дату и время из React
             date = request.data.get('date')
             time = request.data.get('time')
