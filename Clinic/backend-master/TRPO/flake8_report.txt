@@ -1,0 +1,122 @@
+main/admin.py:3:83: W291 trailing whitespace
+main/admin.py:4:21: E128 continuation line under-indented for visual indent
+main/admin.py:5:21: E128 continuation line under-indented for visual indent
+main/admin.py:5:92: W291 trailing whitespace
+main/admin.py:6:21: E128 continuation line under-indented for visual indent
+main/admin.py:46:36: E261 at least two spaces before inline comment
+main/admin.py:58:26: W292 no newline at end of file
+main/backends.py:6:1: E302 expected 2 blank lines, found 1
+main/backends.py:36:20: W291 trailing whitespace
+main/backends.py:36:21: W292 no newline at end of file
+main/models.py:98:1: W293 blank line contains whitespace
+main/models.py:131:1: W293 blank line contains whitespace
+main/models.py:172:44: W291 trailing whitespace
+main/models.py:179:1: W293 blank line contains whitespace
+main/models.py:220:1: W293 blank line contains whitespace
+main/models.py:230:1: W293 blank line contains whitespace
+main/models.py:238:1: W293 blank line contains whitespace
+main/models.py:283:1: W293 blank line contains whitespace
+main/models.py:286:17: W291 trailing whitespace
+main/models.py:287:35: W291 trailing whitespace
+main/models.py:288:19: W291 trailing whitespace
+main/models.py:289:20: W291 trailing whitespace
+main/models.py:293:1: W293 blank line contains whitespace
+main/models.py:346:53: W292 no newline at end of file
+main/serializers.py:7:1: E302 expected 2 blank lines, found 1
+main/serializers.py:19:1: W293 blank line contains whitespace
+main/serializers.py:39:1: E302 expected 2 blank lines, found 1
+main/serializers.py:42:1: W293 blank line contains whitespace
+main/serializers.py:54:1: W293 blank line contains whitespace
+main/serializers.py:61:1: W293 blank line contains whitespace
+main/serializers.py:67:49: W291 trailing whitespace
+main/serializers.py:71:1: W293 blank line contains whitespace
+main/serializers.py:78:1: E302 expected 2 blank lines, found 1
+main/serializers.py:114:121: E501 line too long (122 > 120 characters)
+main/serializers.py:117:1: W293 blank line contains whitespace
+main/serializers.py:165:1: E302 expected 2 blank lines, found 1
+main/serializers.py:174:5: E303 too many blank lines (2)
+main/serializers.py:179:1: W293 blank line contains whitespace
+main/serializers.py:182:1: E303 too many blank lines (3)
+main/serializers.py:183:1: E302 expected 2 blank lines, found 3
+main/serializers.py:221:1: W293 blank line contains whitespace
+main/serializers.py:274:121: E501 line too long (127 > 120 characters)
+main/serializers.py:284:9: F841 local variable 'request' is assigned to but never used
+main/serializers.py:290:1: E302 expected 2 blank lines, found 1
+main/serializers.py:301:1: E305 expected 2 blank lines after class or function definition, found 1
+main/serializers.py:301:1: E402 module level import not at top of file
+main/serializers.py:302:1: F811 redefinition of unused 'Session' from line 3
+main/serializers.py:302:1: E402 module level import not at top of file
+main/serializers.py:304:1: E302 expected 2 blank lines, found 1
+main/serializers.py:422:1: W293 blank line contains whitespace
+main/serializers.py:453:1: W293 blank line contains whitespace
+main/serializers.py:469:1: W293 blank line contains whitespace
+main/serializers.py:472:82: W291 trailing whitespace
+main/serializers.py:474:1: E302 expected 2 blank lines, found 1
+main/serializers.py:478:1: E305 expected 2 blank lines after class or function definition, found 1
+main/serializers.py:478:1: E402 module level import not at top of file
+main/serializers.py:480:1: E302 expected 2 blank lines, found 1
+main/serializers.py:484:1: W293 blank line contains whitespace
+main/serializers.py:484:5: W292 no newline at end of file
+main/tests.py:1:1: F401 'django.test.TestCase' imported but unused
+main/views.py:1:1: F401 'datetime.datetime' imported but unused
+main/views.py:2:1: F401 'django.shortcuts.render' imported but unused
+main/views.py:13:60: W291 trailing whitespace
+main/views.py:20:1: E303 too many blank lines (4)
+main/views.py:21:1: F401 '.serializers.PsychologistEditSerializer' imported but unused
+main/views.py:21:1: F401 '.serializers.ClientEditSerializer' imported but unused
+main/views.py:22:83: W291 trailing whitespace
+main/views.py:31:1: E303 too many blank lines (4)
+main/views.py:35:48: E261 at least two spaces before inline comment
+main/views.py:41:1: W293 blank line contains whitespace
+main/views.py:44:57: W291 trailing whitespace
+main/views.py:47:1: W293 blank line contains whitespace
+main/views.py:53:1: W293 blank line contains whitespace
+main/views.py:56:1: W293 blank line contains whitespace
+main/views.py:59:1: W293 blank line contains whitespace
+main/views.py:80:1: W293 blank line contains whitespace
+main/views.py:83:1: W293 blank line contains whitespace
+main/views.py:103:31: W291 trailing whitespace
+main/views.py:106:1: W293 blank line contains whitespace
+main/views.py:129:1: W293 blank line contains whitespace
+main/views.py:143:34: E261 at least two spaces before inline comment
+main/views.py:145:68: W291 trailing whitespace
+main/views.py:149:1: E302 expected 2 blank lines, found 1
+main/views.py:157:1: W293 blank line contains whitespace
+main/views.py:162:1: W293 blank line contains whitespace
+main/views.py:181:1: W293 blank line contains whitespace
+main/views.py:194:1: W293 blank line contains whitespace
+main/views.py:226:100: W291 trailing whitespace
+main/views.py:235:68: W291 trailing whitespace
+main/views.py:238:1: W293 blank line contains whitespace
+main/views.py:241:1: W293 blank line contains whitespace
+main/views.py:259:1: W293 blank line contains whitespace
+main/views.py:265:34: E261 at least two spaces before inline comment
+main/views.py:268:1: E302 expected 2 blank lines, found 1
+main/views.py:273:1: W293 blank line contains whitespace
+main/views.py:276:1: W293 blank line contains whitespace
+main/views.py:280:68: W291 trailing whitespace
+main/views.py:283:1: W293 blank line contains whitespace
+main/views.py:287:1: W293 blank line contains whitespace
+main/views.py:289:55: W291 trailing whitespace
+main/views.py:292:1: E305 expected 2 blank lines after class or function definition, found 0
+main/views.py:292:1: E402 module level import not at top of file
+main/views.py:293:1: E402 module level import not at top of file
+main/views.py:294:1: E402 module level import not at top of file
+main/views.py:295:1: E402 module level import not at top of file
+main/views.py:297:1: E302 expected 2 blank lines, found 1
+main/views.py:298:44: E261 at least two spaces before inline comment
+main/views.py:305:1: F811 redefinition of unused 'status' from line 3
+main/views.py:305:1: E305 expected 2 blank lines after class or function definition, found 1
+main/views.py:305:1: E402 module level import not at top of file
+main/views.py:306:1: F811 redefinition of unused 'Response' from line 5
+main/views.py:306:1: E402 module level import not at top of file
+main/views.py:307:1: F811 redefinition of unused 'SessionCreateSerializer' from line 21
+main/views.py:307:1: E402 module level import not at top of file
+main/views.py:308:1: E302 expected 2 blank lines, found 0
+main/views.py:327:1: E305 expected 2 blank lines after class or function definition, found 1
+main/views.py:327:1: E402 module level import not at top of file
+main/views.py:328:1: F811 redefinition of unused 'Session' from line 12
+main/views.py:328:1: E402 module level import not at top of file
+main/views.py:329:1: E402 module level import not at top of file
+main/views.py:331:1: E302 expected 2 blank lines, found 1
+main/views.py:339:38: W292 no newline at end of file
