@@ -203,7 +203,7 @@ class ClientRegisterSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Имя не может содержать цифры.")
         return value
 
-    def validate_name(self, value):
+    def validate_usernamename(self, value):
         if any(char.isdigit() for char in value):
             raise serializers.ValidationError("Имя не может содержать цифры.")
         # Защита от тегов
