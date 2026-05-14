@@ -6,12 +6,16 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView
 from django.shortcuts import get_object_or_404
+import logging
 
 # Импортируем модели
 from .models import (
     Psychologist, Method, Problem, PsychologistApplication, 
     Session, Statussession, Client
 )
+
+
+
 
 # Импортируем сериализаторы
 from .serializers import (
@@ -20,6 +24,11 @@ from .serializers import (
     UserProfileSerializer, PsychologistEditSerializer, ClientEditSerializer,
     SessionCreateSerializer, ChangePasswordSerializer
 )
+
+
+
+
+logger = logging.getLogger(__name__)
 
 
 class AvailableSlotsView(APIView):
@@ -139,6 +148,23 @@ class MyProfileView(APIView):
 
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
+
+    def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+        if response.status_code == 200:
+            user = self.get_serializer().user  # нужно сохранить user в сериализаторе
+            logger.info(f"Успешный вход пользователя {user.phone} (роль: {user.role})")
+            
+            # Изменяем формат ответа – добавляем user_id и role
+            response.data['user_id'] = user.id
+            response.data['role'] = user.role
+            response.data['message'] = 'Добро пожаловать!'
+            
+            # автоматически создаём профиль клиента, если его нет (для роли client)
+            if user.role == 'client' and not hasattr(user, 'client'):
+                from .models import Client
+                Client.objects.get_or_create(user=user, defaults={'name': 'Новый', 'surname': 'Клиент'})
+        return response
 
 
 # для заявки психолога

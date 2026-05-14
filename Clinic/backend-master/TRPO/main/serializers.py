@@ -165,11 +165,18 @@ class UserProfileSerializer(serializers.ModelSerializer):
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     username_field = 'phone'
 
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        self.user = self.user  # сохраняем в экземпляр
+        return data
+
+
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
         token['role'] = user.role
         return token
+    
 
 
 # Для заявки психолога
