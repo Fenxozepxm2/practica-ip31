@@ -1,9 +1,19 @@
-asgiref==3.11.1
-Django==6.0.4
-django-cors-headers==4.9.0
-djangorestframework==3.17.1
-djangorestframework_simplejwt==5.5.1
-pillow==12.2.0
-PyJWT==2.12.1
-sqlparse==0.5.5
-tzdata==2026.1
+Package                       Version
+----------------------------- -------
+asgiref                       3.11.1
+Django                        6.0.4
+django-cors-headers           4.9.0
+django-csp                    4.0
+djangorestframework           3.17.1
+djangorestframework_simplejwt 5.5.1
+flake8                        7.3.0
+itsdangerous                  2.2.0
+mccabe                        0.7.0
+packaging                     26.2
+pillow                        12.2.0
+pip                           26.0.1
+pycodestyle                   2.14.0
+pyflakes                      3.4.0
+PyJWT                         2.12.1
+sqlparse                      0.5.5
+tzdata                        2026.1
