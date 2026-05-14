@@ -231,15 +231,6 @@ class Session(models.Model):
     date = models.DateField(blank=True, null=True, verbose_name="Дата сессии")
     time = models.TimeField(blank=True, null=True, verbose_name="Время сессии")
 
-    platezhi = models.ForeignKey(
-        'Platezhi', on_delete=models.SET_NULL, null=True, blank=True,
-        db_column='platezhi_id', related_name='session_platezhi_rel'
-    )
-    
-    feedback = models.ForeignKey(
-        'ClientFeedback', on_delete=models.SET_NULL, null=True, blank=True,
-        db_column='feedback_id', related_name='session_feedback_rel'
-    )
     notes = models.CharField(max_length=300, blank=True, null=True)
 
     class Meta:

@@ -152,18 +152,13 @@ class MyTokenObtainPairView(TokenObtainPairView):
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
         if response.status_code == 200:
-            user = self.get_serializer().user  # нужно сохранить user в сериализаторе
-            logger.info(f"Успешный вход пользователя {user.phone} (роль: {user.role})")
-            
-            # Изменяем формат ответа – добавляем user_id и role
-            response.data['user_id'] = user.id
-            response.data['role'] = user.role
-            response.data['message'] = 'Добро пожаловать!'
-            
-            # автоматически создаём профиль клиента, если его нет (для роли client)
-            if user.role == 'client' and not hasattr(user, 'client'):
-                from .models import Client
-                Client.objects.get_or_create(user=user, defaults={'name': 'Новый', 'surname': 'Клиент'})
+            # Получаем пользователя из сериализатора
+            serializer = self.get_serializer()
+            user = getattr(serializer, 'user', None)
+            if user:
+                logger.info(f"Успешный вход пользователя {user.phone} (роль: {user.role})")
+                response.data['user_id'] = user.id
+                response.data['role'] = user.role
         return response
 
 

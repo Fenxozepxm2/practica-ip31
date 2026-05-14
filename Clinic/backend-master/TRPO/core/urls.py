@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -27,6 +27,7 @@ urlpatterns = [
     path('api/auth/change-password/', ChangePasswordView.as_view(), name='change-password'),
     path('api/bookings/', BookingCreateView.as_view(), name='booking-create'),
     path('api/bookings/<int:pk>/', BookingRetrieveUpdateDestroyView.as_view(), name='booking-detail'),
+    path('silk/', include('silk.urls', namespace='silk')),
     ]
 
 
