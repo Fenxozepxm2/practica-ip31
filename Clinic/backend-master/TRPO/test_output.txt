@@ -1,0 +1,75 @@
+Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+Found 24 test(s).
+Operations to perform:
+  Synchronize unmigrated apps: corsheaders, csp, messages, rest_framework, staticfiles
+  Apply all migrations: admin, auth, contenttypes, main, sessions, silk
+Synchronizing apps without migrations:
+  Creating tables...
+    Running deferred SQL...
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0001_initial... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying main.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying main.0002_alter_methodtechnika_options_and_more... OK
+  Applying main.0003_client_email... OK
+  Applying main.0004_session_date_session_time... OK
+  Applying main.0005_psychologist_selected_methods_and_more... OK
+  Applying main.0006_clientfeedback_alter_session_feedback_and_more... OK
+  Applying main.0007_alter_methodtechnika_method_and_more... OK
+  Applying main.0008_remove_session_feedback_remove_session_platezhi... OK
+  Applying sessions.0001_initial... OK
+  Applying silk.0001_initial... OK
+  Applying silk.0002_auto_update_uuid4_id_field... OK
+  Applying silk.0003_request_prof_file... OK
+  Applying silk.0004_request_prof_file_storage... OK
+  Applying silk.0005_increase_request_prof_file_length... OK
+  Applying silk.0006_fix_request_prof_file_blank... OK
+  Applying silk.0007_sqlquery_identifier... OK
+  Applying silk.0008_sqlquery_analysis...test_available_slots (main.tests.AvailableSlotsTest.test_available_slots) ... ok
+test_change_password_success (main.tests.ChangePasswordTest.test_change_password_success) ... ok
+test_change_password_wrong_old (main.tests.ChangePasswordTest.test_change_password_wrong_old) ... ok
+test_registration_duplicate_phone (main.tests.ClientRegistrationTest.test_registration_duplicate_phone) ... ok
+test_registration_invalid_name_with_digits (main.tests.ClientRegistrationTest.test_registration_invalid_name_with_digits) ... ok
+test_successful_registration (main.tests.ClientRegistrationTest.test_successful_registration) ... ok
+test_create_feedback_authenticated (main.tests.FeedbackTest.test_create_feedback_authenticated) ... ok
+test_create_feedback_unauthenticated (main.tests.FeedbackTest.test_create_feedback_unauthenticated) ... ok
+test_psychologists_endpoint_under_load (main.tests.LoadTest.test_psychologists_endpoint_under_load) ... ok
+test_login_with_email_success (main.tests.LoginTest.test_login_with_email_success) ... ok
+test_login_with_phone_success (main.tests.LoginTest.test_login_with_phone_success) ... ok
+test_login_wrong_password (main.tests.LoginTest.test_login_wrong_password) ... ok
+test_methods_list (main.tests.MethodProblemTest.test_methods_list) ... ok
+test_problems_list (main.tests.MethodProblemTest.test_problems_list) ... ok
+test_get_profile_authenticated (main.tests.ProfileTest.test_get_profile_authenticated) ... ok
+test_get_profile_unauthenticated (main.tests.ProfileTest.test_get_profile_unauthenticated) ... ok
+test_update_profile_patch (main.tests.ProfileTest.test_update_profile_patch) ... ok
+test_apply_as_psychologist (main.tests.PsychologistApplicationTest.test_apply_as_psychologist) ... ok
+test_list_contains_psychologist_data (main.tests.PsychologistListTest.test_list_contains_psychologist_data) ... ok
+test_list_returns_200 (main.tests.PsychologistListTest.test_list_returns_200) ... ok
+test_psychologist_detail (main.tests.PsychologistListTest.test_psychologist_detail) ... ok
+test_create_session_authenticated (main.tests.SessionCreationTest.test_create_session_authenticated) ... ok
+test_create_session_missing_psychologist (main.tests.SessionCreationTest.test_create_session_missing_psychologist) ... ok
+test_create_session_unauthenticated (main.tests.SessionCreationTest.test_create_session_unauthenticated) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 12.773s
+
+OK
+Destroying test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+ OK
+System check identified no issues (0 silenced).
+100 запросов выполнено за 0.46 сек

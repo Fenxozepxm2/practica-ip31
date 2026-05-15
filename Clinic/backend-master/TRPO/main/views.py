@@ -6,6 +6,14 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView
 from django.shortcuts import get_object_or_404
+from rest_framework import generics, permissions
+from .models import Session
+from rest_framework import generics
+from .models import ClientFeedback
+from .serializers import FeedbackSerializer
+from rest_framework.permissions import IsAuthenticated
+from .serializers import SessionCreateSerializer
+
 import logging
 
 # Импортируем модели
@@ -152,18 +160,13 @@ class MyTokenObtainPairView(TokenObtainPairView):
     def post(self, request, *args, **kwargs):
         response = super().post(request, *args, **kwargs)
         if response.status_code == 200:
-            user = self.get_serializer().user  # нужно сохранить user в сериализаторе
-            logger.info(f"Успешный вход пользователя {user.phone} (роль: {user.role})")
-            
-            # Изменяем формат ответа – добавляем user_id и role
-            response.data['user_id'] = user.id
-            response.data['role'] = user.role
-            response.data['message'] = 'Добро пожаловать!'
-            
-            # автоматически создаём профиль клиента, если его нет (для роли client)
-            if user.role == 'client' and not hasattr(user, 'client'):
-                from .models import Client
-                Client.objects.get_or_create(user=user, defaults={'name': 'Новый', 'surname': 'Клиент'})
+            # Получаем пользователя из сериализатора
+            serializer = self.get_serializer()
+            user = getattr(serializer, 'user', None)
+            if user:
+                logger.info(f"Успешный вход пользователя {user.phone} (роль: {user.role})")
+                response.data['user_id'] = user.id
+                response.data['role'] = user.role
         return response
 
 
@@ -289,10 +292,7 @@ class ChangePasswordView(APIView):
                 {"detail": "Пароль успешно изменен."}, 
                 status=status.HTTP_200_OK
             )
-from rest_framework import generics
-from .models import ClientFeedback
-from .serializers import FeedbackSerializer
-from rest_framework.permissions import IsAuthenticated
+
 
 class FeedbackCreateView(generics.CreateAPIView):
     queryset = ClientFeedback.objects.all() # Изменили queryset
@@ -324,9 +324,7 @@ class BookingCreateView(generics.CreateAPIView):
             "notes": session.notes,
         }, status=201)
 
-from rest_framework import generics, permissions
-from .models import Session
-from .serializers import SessionCreateSerializer
+
 
 class BookingRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = SessionCreateSerializer
@@ -334,6 +332,11 @@ class BookingRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         user = self.request.user
+        # Если пользователь – психолог
         if hasattr(user, 'psychologist'):
             return Session.objects.filter(psychologist=user.psychologist)
+        # Если пользователь – клиент
+        if hasattr(user, 'client'):
+            return Session.objects.filter(client=user.client)
+        # Если нет ни того, ни другого (например, менеджер) – пустой queryset
         return Session.objects.none()

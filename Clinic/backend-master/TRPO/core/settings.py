@@ -21,7 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    
     'main',
     'rest_framework',
     'corsheaders',
@@ -128,6 +128,9 @@ AUTH_USER_MODEL = 'main.User'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+
+INSTALLED_APPS += ['silk']
+MIDDLEWARE += ['silk.middleware.SilkyMiddleware']
 
 # CORS
 CORS_ALLOWED_ORIGINS = [

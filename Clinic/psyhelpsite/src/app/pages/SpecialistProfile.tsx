@@ -2,14 +2,12 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router';
 import { Button } from '../components/Button';
 import { useApp } from '../context/AppContext';
-import { useBookings } from '../hooks/useBookings';
 import { toast } from 'sonner';
 
 export function SpecialistProfile() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { isAuthenticated, user } = useApp();
-  const { createBooking, isLoading } = useBookings();
 
   const [specialist, setSpecialist] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -41,54 +39,41 @@ export function SpecialistProfile() {
     return `http://127.0.0.1:8000${photoUrl}`;
   };
 
-  //  ФУНКЦИЯ ЗАПИСИ С ПРОВЕРКОЙ АВТОРИЗАЦИИ
-  const handleBooking = async () => {
-    // 🔒 Проверка: только авторизованные пользователи могут записаться
+  // ✅ НОВАЯ ФУНКЦИЯ ЗАПИСИ (без внешнего сервиса)
+  const handleBooking = () => {
+    // 🔒 Проверка авторизации
     if (!isAuthenticated || !user) {
       toast.error('Для записи необходимо авторизоваться', {
         description: 'Пожалуйста, войдите в систему или зарегистрируйтесь',
-        duration: 5000
+        duration: 5000,
       });
-      
-      // Сохраняем текущий путь, чтобы вернуться после входа
-      navigate('/login', { 
-        state: { from: `/specialist/${id}` } 
+      navigate('/login', {
+        state: { from: `/specialist/${id}` },
       });
       return;
     }
 
-    try {
-      await createBooking({
-        specialistId: specialist.id,
-        specialistName: specialist.full_name,
-        date: null as unknown as string,
-        time: null as unknown as string,
-        clientName: (user as any).details?.name || user.name || 'Клиент', 
-        clientPhone: user.phone,
-      });
-    } catch (error) {
-      console.error("Не удалось сохранить в БД:", error);
-    }
-
-
-    const targetUrl = specialist.qlick_url || `https://qlick.io/ru/specialist/${specialist.id}`;
-    window.open(targetUrl, '_blank', 'noopener,noreferrer');
-
-    // Показываем уведомление об успехе
-    toast.success('Переход к выбору времени консультации', {
-      description: 'Вы будете перенаправлены на платформу бронирования',
-      duration: 3000
-    });
+    // 📅 Переход на внутреннюю страницу выбора времени
+    navigate(`/booking/${specialist.id}`);
   };
 
-  if (loading) return <div className="min-h-[calc(100vh-88px)] flex items-center justify-center"><p>Загрузка...</p></div>;
-  if (!specialist) return <div className="min-h-[calc(100vh-88px)] flex items-center justify-center"><p>Специалист не найден</p></div>;
+  if (loading)
+    return (
+      <div className="min-h-[calc(100vh-88px)] flex items-center justify-center">
+        <p>Загрузка...</p>
+      </div>
+    );
+  if (!specialist)
+    return (
+      <div className="min-h-[calc(100vh-88px)] flex items-center justify-center">
+        <p>Специалист не найден</p>
+      </div>
+    );
 
   return (
     <div className="min-h-[calc(100vh-88px)] bg-secondary py-20 px-8">
       <div className="max-w-[1440px] mx-auto">
         <div className="grid grid-cols-2 gap-12">
-
           {/* Фото специалиста */}
           <div className="bg-white rounded-lg overflow-hidden h-fit">
             <img
@@ -103,7 +88,6 @@ export function SpecialistProfile() {
             <h2 className="mb-6">{specialist.full_name}</h2>
 
             <div className="space-y-6">
-              
               {/* Образование */}
               {specialist.education && (
                 <div>
@@ -111,9 +95,9 @@ export function SpecialistProfile() {
                   <div className="text-foreground">
                     {typeof specialist.education === 'string' && specialist.education.includes(',') ? (
                       <ul className="list-disc pl-5 space-y-1">
-                        {specialist.education.split(',').map((edu: string, idx: number) => (
+                        {specialist.education.split(',').map((edu: string, idx: number) =>
                           edu.trim() ? <li key={`edu-list-${idx}`}>{edu.trim()}</li> : null
-                        ))}
+                        )}
                       </ul>
                     ) : (
                       <p>{specialist.education}</p>
@@ -121,7 +105,7 @@ export function SpecialistProfile() {
                   </div>
                 </div>
               )}
-              
+
               {/* Опыт работы */}
               {specialist.experience && (
                 <div>
@@ -162,25 +146,21 @@ export function SpecialistProfile() {
                   </div>
                 )
               )}
-              
-              {/* 🔐 КНОПКА ЗАПИСИ С ПРОВЕРКОЙ АВТОРИЗАЦИИ */}
+
+              {/* КНОПКА ЗАПИСИ */}
               <div className="pt-6 border-t">
-                <Button 
-                  size="lg" 
-                  onClick={handleBooking}  // 👈 вызываем функцию с проверкой
-                  loading={isLoading}
-                  className="w-full"
-                >
+                <Button size="lg" onClick={handleBooking} className="w-full">
                   Записаться к специалисту
                 </Button>
-                {/* Подсказка для неавторизованных пользователей */}
                 {!isAuthenticated && (
                   <p className="text-muted-foreground text-sm mt-2 text-center">
-                    Для записи необходимо <button onClick={() => navigate('/login')} className="text-primary hover:underline">войти в систему</button>
+                    Для записи необходимо{' '}
+                    <button onClick={() => navigate('/login')} className="text-primary hover:underline">
+                      войти в систему
+                    </button>
                   </p>
                 )}
               </div>
-
             </div>
           </div>
         </div>
