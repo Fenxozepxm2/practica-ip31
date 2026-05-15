@@ -130,33 +130,32 @@ export const authApi = {
     localStorage.removeItem('refresh_token');
     localStorage.removeItem('currentUser');
   },
-
+  
   // Получение текущего пользователя по токену
   async getCurrentUser(): Promise<User | null> {
     const token = apiClient.getAuthToken();
     if (!token) return null;
-
     const response = await fetch('http://127.0.0.1:8000/api/profile/me/', {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
     });
-
+    
     if (!response.ok) {
       apiClient.clearAuthToken();
       return null;
     }
-
+    
     const data = await response.json();
-
+    console.log('BACKEND ROLE:', data.role);
     // Приводим данные из Django к формату User в React
     const user: User = {
       id: String(data.id || data.user_id || ''),
       name: data.full_name || data.name || '',
       phone: data.phone || '',
       email: data.email || '',
-      role: data.role === 'psychologist' || data.role === 'manager' ? 'staff' : 'client',
+      role: data.role !== 'client' ? 'staff' : 'client',
       specialistId: data.specialist_id ? String(data.specialist_id) : undefined,
     };
 

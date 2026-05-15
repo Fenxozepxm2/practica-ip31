@@ -82,7 +82,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     try {
       const loggedInUser = await auth.loginStaff({ email, password });
       setUser(loggedInUser);
-      
+      console.log('User from loginStaff:', loggedInUser); // 👈 добавь сюда
+      console.log('role:', loggedInUser.role); 
       // Load staff sessions after login
       if (loggedInUser.specialistId) {
         const staffSessions = await bookings.getSpecialistSessions(loggedInUser.specialistId);
